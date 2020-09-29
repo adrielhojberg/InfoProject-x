@@ -3,6 +3,18 @@ from .models import Usuario
 from django.contrib.auth.forms import UserCreationForm
 from apps.perfil.models import Profile
 
+def rubros():
+    RUBRO1 = "OTROS"
+    RUBRO2 = "HERRERO"
+    RUBRO3 = "CARPINTERO"
+    RUBRO_CHOICES = (
+        (RUBRO3, "Carpintero"),
+        (RUBRO2, "Herrero"),
+        (RUBRO1, "Otros"),
+    )      
+    return RUBRO_CHOICES
+
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
@@ -27,6 +39,7 @@ class UserUpdateForm(forms.ModelForm):
             self.fields[fieldname].label = ''
 
 class ProfileUpdateForm(forms.ModelForm):
+    rubro = forms.ChoiceField(choices=rubros())
     class Meta:
         model = Profile
         fields = ['image','aboutus','instagram','twitter','telefono','rubro']
@@ -36,7 +49,6 @@ class ProfileUpdateForm(forms.ModelForm):
                 'aboutus': forms.TextInput(attrs={'class': 'form-control mb-4'}),
                 'twitter': forms.TextInput(attrs={'class': 'form-control mb-4'}),
                 'telefono': forms.TextInput(attrs={'class': 'form-control mb-4'}),
-                'rubro': forms.TextInput(attrs={'class': 'form-control'}),
 
             }
     def __init__(self, *args, **kwargs):

@@ -2,6 +2,7 @@ from django.db import models
 from apps.usuarios.models import Usuario
 from PIL import Image
 
+
 class Profile(models.Model):
     user = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     image = models.ImageField(default = 'default-user-image.jpg', upload_to='profile_pics')
@@ -9,7 +10,7 @@ class Profile(models.Model):
     instagram = models.CharField(max_length=30, default="Instagram...")
     twitter = models.CharField(max_length=30, default="@Twitter...")
     telefono = models.BigIntegerField(default=0)
-    rubro = models.CharField(max_length=30, default="Rubro...")
+    rubro = models.CharField(max_length=30)
     
 
     def __str__(self):
